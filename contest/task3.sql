@@ -20,16 +20,12 @@ FROM (
         SELECT planet_id
         FROM (
             SELECT planet_id,
-                   COUNT(*) AS planet_visit_count
-            FROM (
-                SELECT planet_id,
-                       commander_id
-                FROM Flight
-                WHERE commander_id IS NOT NULL AND planet_id IS NOT NULL
-                GROUP BY planet_id, commander_id
-            ) PlanetCommander GROUP BY planet_id
-        ) PlanetVisitCount
-        WHERE planet_visit_count = 1
+                   commander_id
+            FROM Flight
+            WHERE commander_id IS NOT NULL AND planet_id IS NOT NULL
+            GROUP BY planet_id, commander_id
+        ) PlanetCommander GROUP BY planet_id
+        HAVING COUNT(*) = 1
     )
 ) LostPlanetId
 GROUP BY commander_id, commander_name;
