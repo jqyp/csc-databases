@@ -4,3 +4,6 @@
 --
 -- Результат
 -- quotient INT, remainder INT
+
+SELECT 146 * 239 / 42 AS quotient,
+       146 * 239 % 42 AS remainder;

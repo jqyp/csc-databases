@@ -3,3 +3,6 @@
 --
 -- Результат
 -- value TEXT
+
+SELECT value
+FROM Government;

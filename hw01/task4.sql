@@ -4,3 +4,7 @@
 --
 -- Результат
 -- name TEXT
+
+SELECT name
+FROM Planet
+WHERE name ~ '^A|Z';
