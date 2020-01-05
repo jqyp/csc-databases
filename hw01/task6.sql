@@ -4,3 +4,8 @@
 --
 -- Результат
 -- name TEXT
+
+SELECT Planet.name
+FROM Planet
+JOIN Government ON Planet.government_id = Government.id
+WHERE Government.value != 'Феодализм';
