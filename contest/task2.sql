@@ -8,3 +8,14 @@
 --
 -- Результат
 -- commander TEXT, flight_count INT, flight_pctg NUMERIC
+
+SELECT commander,
+       flight_count,
+       (flight_count::DECIMAL / total_flight_count)::NUMERIC(3, 2) flight_pctg
+FROM (
+  SELECT DISTINCT Commander.name AS commander,
+                  COUNT(Flight.id) OVER (PARTITION BY Commander.id) flight_count,
+                  COUNT(*) OVER () AS total_flight_count
+  FROM Commander
+  LEFT JOIN Flight ON Commander.id = Flight.commander_id
+) AS CommanderFlightCount;
